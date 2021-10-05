@@ -11,13 +11,11 @@ public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+    private String zipCode;
     public CityInfo() {
     }
 
-    private String zipCode;
+
     private String city;
 
     @OneToMany (mappedBy = "cityInfo", cascade = CascadeType.PERSIST)
@@ -46,14 +44,6 @@ public class CityInfo implements Serializable {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getZipCode() {

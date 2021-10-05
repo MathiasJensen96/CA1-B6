@@ -45,17 +45,28 @@ public class PersonFacadeTest {
     //TODO -- Make sure to change the code below to use YOUR OWN entity class
     @BeforeEach
     public void setUp() {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.createNativeQuery("delete from phone;").executeUpdate();
+        em.createNativeQuery("delete from hobby_person;").executeUpdate();
+        em.createNativeQuery("delete from hobby;").executeUpdate();
+        em.createNativeQuery("delete from person;").executeUpdate();
+        em.createNativeQuery("delete from address;").executeUpdate();
+        em.createNativeQuery("delete from cityinfo;").executeUpdate();
+
+        em.getTransaction().commit();
         person1 = new Person("aaa", "bbb", "ccc");
         person2 = new Person("Mathias", "Filtenborg", "F@gmail.com");
         phone1 = new Phone("12345678", "home");
         phone2 = new Phone("87654321", "cell");
-        hobby1 = new Hobby("Rundbold", "Slå til en tennisbold og løb");
-        hobby2 = new Hobby("Fodbold", "Spark til en bold");
+        hobby1 = new Hobby("test", "wiki.test", "testing", "tested");
+        hobby2 = new Hobby("test1", "wiki.test1", "testing1", "tested1");
         address1 = new Address("Holmgade 20", "4. sal");
         address2 = new Address("Æblegade 6", "Hvidt hus");
         ci1 = new CityInfo("2800", "Kgs. Lyngby");
         ci2 = new CityInfo("2880", "Bagsværd");
         ci3 = new CityInfo("123", "Test");
+
         person1.addPhone(phone1);
         person1.addHobby(hobby1);
         person2.addPhone(phone2);
@@ -65,10 +76,9 @@ public class PersonFacadeTest {
         ci1.addAddress(address1);
         ci2.addAddress(address2);
 
-        EntityManager em = emf.createEntityManager();
+
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
             em.persist(person1);
             em.persist(person2);
             em.persist(address1);
@@ -137,14 +147,14 @@ public class PersonFacadeTest {
         person.updateFromDto(result);
 
         assertEquals("Mathias", person.getFirstName());
-        assertEquals("Rundbold", person.getHobbies().get(0).getName());
+        assertEquals("test", person.getHobbies().get(0).getName());
         assertEquals("Æblegade 6", person.getAddress().getStreet());
         assertEquals("2880", person.getAddress().getCityInfo().getZipCode());
     }
 
     @Test
     public void getAllPersonsWithHobbyTest() {
-        PersonsDTO result = facade.getAllPersonsWithHobby("Rundbold");
+        PersonsDTO result = facade.getAllPersonsWithHobby("test");
         PersonDTO p1DTO = new PersonDTO(person1);
         PersonDTO p2DTO = new PersonDTO(person2);
         assertThat(result.getAll(), containsInAnyOrder(p1DTO, p2DTO));
@@ -159,7 +169,7 @@ public class PersonFacadeTest {
 
     @Test
     public void getNumberPeopleFromHobbyTest() {
-        PersonsDTO result = facade.getNumberPeopleFromHobby("Rundbold");
+        PersonsDTO result = facade.getNumberPeopleFromHobby("test");
         assertEquals(2, result.getAll().size());
     }
 

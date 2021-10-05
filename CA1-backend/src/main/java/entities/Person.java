@@ -29,7 +29,7 @@ public class Person implements Serializable {
     @ManyToOne
     private Address address;
 
-    @OneToMany(mappedBy = "person", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     List<Phone> phones;
 
     public Person(String firstName, String lastName, String email) {

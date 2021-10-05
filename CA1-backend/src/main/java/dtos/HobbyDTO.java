@@ -11,7 +11,7 @@ public class HobbyDTO {
 
     public HobbyDTO(Hobby h) {
         this.name = h.getName();
-        this.description = h.getDescription();
+        //this.description = h.getDescription();
     }
 
     public HobbyDTO(String n, String desc) {
