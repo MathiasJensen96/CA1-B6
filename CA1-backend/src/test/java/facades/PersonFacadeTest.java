@@ -46,15 +46,6 @@ public class PersonFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.createNativeQuery("delete from phone;").executeUpdate();
-        em.createNativeQuery("delete from hobby_person;").executeUpdate();
-        em.createNativeQuery("delete from hobby;").executeUpdate();
-        em.createNativeQuery("delete from person;").executeUpdate();
-        em.createNativeQuery("delete from address;").executeUpdate();
-        em.createNativeQuery("delete from cityinfo;").executeUpdate();
-
-        em.getTransaction().commit();
         person1 = new Person("aaa", "bbb", "ccc");
         person2 = new Person("Mathias", "Filtenborg", "F@gmail.com");
         phone1 = new Phone("12345678", "home");
@@ -94,7 +85,15 @@ public class PersonFacadeTest {
 
     @AfterEach
     public void tearDown() {
-//        Remove any data after each test was run
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.createNativeQuery("delete from phone;").executeUpdate();
+        em.createNativeQuery("delete from hobby_person;").executeUpdate();
+        em.createNativeQuery("delete from hobby;").executeUpdate();
+        em.createNativeQuery("delete from person;").executeUpdate();
+        em.createNativeQuery("delete from address;").executeUpdate();
+        em.createNativeQuery("delete from cityinfo;").executeUpdate();
+        em.getTransaction().commit();
     }
 
     @Test
