@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.PersonDTO;
+import dtos.PersonRestDTO;
 import dtos.PersonsDTO;
 import entities.*;
 import org.junit.jupiter.api.*;
@@ -102,7 +103,7 @@ public class PersonFacadeTest {
         String fName = "Mathias";
         String lName = "Filtenborg";
         String email = "F@gmail.com";
-        PersonDTO result = facade.addPerson(fName, lName, email);
+        PersonDTO result = facade.addPerson(new PersonRestDTO(fName, lName, email));
         assertEquals(expResult, result);
     }
     //TODO: Virker men nok ikke den rigtige måde

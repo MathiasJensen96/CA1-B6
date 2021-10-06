@@ -11,6 +11,7 @@ import dtos.PersonDTO;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import dtos.PersonRestDTO;
 import entities.*;
 import errorhandling.PersonNotFoundException;
 import utils.EMF_Creator;
@@ -26,11 +27,16 @@ public class Populator {
         EntityManager em = emf.createEntityManager();
         PersonFacade pf = PersonFacade.getPersonFacade(emf);
 
+        PersonDTO pdto = pf.addPerson(new PersonRestDTO("August", "Duelund", "tunor@gmail.com"));
+        Person person = new Person();
+        person.updateFromDto(pdto);
+
+
         Person p1 = new Person("Mathias", "Jensen", "cph-mj839@cphbusiness.dk");
         Address a1 = new Address("Holsteinsgade 66", "4.12");
         Phone phone1 = new Phone("20439396", "Cell");
         CityInfo c1 = em.find(CityInfo.class, "2100");
-        Hobby h1 = em.find(Hobby.class, (long)1);
+        Hobby h1 = em.find(Hobby.class, (long)500);
 
         a1.addPerson(p1);
         p1.addPhone(phone1);

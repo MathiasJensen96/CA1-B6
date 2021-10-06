@@ -1,10 +1,11 @@
 package facades;
 
 import dtos.PersonDTO;
+import dtos.PersonRestDTO;
 import dtos.PersonsDTO;
 
 public interface IPersonFacade {
-    PersonDTO addPerson(String fName, String lName, String phone) throws Exception;
+    PersonDTO addPerson(PersonRestDTO pdto) throws Exception;
 
     PersonDTO deletePerson(Long id) throws Exception;
 

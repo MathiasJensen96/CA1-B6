@@ -5,7 +5,6 @@ import entities.CityInfo;
 import java.util.Objects;
 
 public class CityInfoDTO {
-    private long id;
     private String zipCode;
     private String city;
 
@@ -19,15 +18,7 @@ public class CityInfoDTO {
         this.city = city;
     }
 
-    public CityInfoDTO(){
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public CityInfoDTO() {
     }
 
     public String getZipCode() {
@@ -51,11 +42,11 @@ public class CityInfoDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CityInfoDTO that = (CityInfoDTO) o;
-        return id == that.id && zipCode == that.zipCode && city.equals(that.city);
+        return Objects.equals(zipCode, that.zipCode) && Objects.equals(city, that.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, zipCode, city);
+        return Objects.hash(zipCode, city);
     }
 }

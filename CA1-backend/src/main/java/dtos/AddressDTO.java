@@ -8,10 +8,13 @@ public class AddressDTO {
     private long id;
     private String street;
     private String additionalInfo;
+    private CityInfoDTO cityInfo;
 
     public AddressDTO(Address a) {
+        this.id = a.getId();
         this.street = a.getStreet();
         this.additionalInfo = a.getAdditionalInfo();
+        this.cityInfo = new CityInfoDTO(a.getCityInfo());
     }
 
     public AddressDTO(String s, String add) {
@@ -44,6 +47,14 @@ public class AddressDTO {
 
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+
+    public CityInfoDTO getCityInfo() {
+        return cityInfo;
+    }
+
+    public void setCityInfo(CityInfoDTO cityInfo) {
+        this.cityInfo = cityInfo;
     }
 
     @Override

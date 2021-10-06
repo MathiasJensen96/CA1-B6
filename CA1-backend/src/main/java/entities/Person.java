@@ -24,6 +24,7 @@ public class Person implements Serializable {
     private String email;
 
 
+
     @ManyToMany(mappedBy = "persons", cascade = CascadeType.ALL)
     List<Hobby> hobbies;
 
@@ -131,5 +132,16 @@ public class Person implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", hobbies=" + hobbies +
+                '}';
     }
 }

@@ -10,32 +10,32 @@ import java.util.Objects;
  *
  * @author tha
  */
-public class PersonDTO {
+public class PersonRestDTO {
     private long id;
     private String firstName;
     private String lastName;
     private String email;
     private AddressDTO address;
-    private List<HobbyDTO> hobbies;
+    private List<Integer> hobbies;
     private List<PhoneDTO> phones;
 
-    public PersonDTO(Person p) {
+    public PersonRestDTO(Person p) {
         this.id = p.getId();
         this.firstName = p.getFirstName();
         this.lastName = p.getLastName();
         this.email = p.getEmail();
         this.address = new AddressDTO(p.getAddress());
-        this.hobbies = HobbyDTO.getHobbiesFromList(p.getHobbies());
-        this.phones = PhoneDTO.getPhonesFromList(p.getPhones());
+        this.hobbies = new ArrayList<>();
+        this.phones = new ArrayList<>();
     }
 
-    public PersonDTO(String fName, String lName, String email) {
+    public PersonRestDTO(String fName, String lName, String email) {
         this.firstName = fName;
         this.lastName = lName;
         this.email = email;
     }
 
-    public PersonDTO() {
+    public PersonRestDTO() {
     }
 
     public long getId() {
@@ -78,24 +78,19 @@ public class PersonDTO {
         this.address = address;
     }
 
-    public List<HobbyDTO> getHobbies() {
+    public List<Integer> getHobbies() {
         return hobbies;
     }
 
-    public void setHobbies(List<HobbyDTO> hobbies) {
+    public void setHobbies(List<Integer> hobbies) {
         this.hobbies = hobbies;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PersonDTO personDTO = (PersonDTO) o;
-        return id == personDTO.id && firstName.equals(personDTO.firstName) && lastName.equals(personDTO.lastName) && email.equals(personDTO.email);
+    public List<PhoneDTO> getPhones() {
+        return phones;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email);
+    public void setPhones(List<PhoneDTO> phones) {
+        this.phones = phones;
     }
 }

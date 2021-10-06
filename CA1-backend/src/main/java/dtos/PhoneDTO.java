@@ -1,7 +1,10 @@
 package dtos;
 
+import entities.Hobby;
 import entities.Phone;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class PhoneDTO {
@@ -10,6 +13,7 @@ public class PhoneDTO {
     private String description;
 
     public PhoneDTO(Phone p) {
+        this.id = p.getId();
         this.number = p.getNumber();
         this.description = p.getDescription();
     }
@@ -22,6 +26,13 @@ public class PhoneDTO {
     public PhoneDTO(){
     }
 
+    public static List<PhoneDTO> getPhonesFromList(List<Phone> p) {
+        List<PhoneDTO> pDto = new ArrayList<>();
+        for (Phone phone: p) {
+            pDto.add(new PhoneDTO(phone));
+        }
+        return pDto;
+    }
     public long getId() {
         return id;
     }

@@ -1,7 +1,6 @@
 package facades;
 
-import dtos.PersonDTO;
-import dtos.PersonsDTO;
+import dtos.*;
 import entities.*;
 import errorhandling.PersonNotFoundException;
 
@@ -32,15 +31,33 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public PersonDTO addPerson(String fName, String lName, String email) {
-        Person person = new Person(fName, lName, email);
+    public PersonDTO addPerson(PersonRestDTO pdto) {
         EntityManager em = emf.createEntityManager();
+        Person person = new Person(pdto.getFirstName(), pdto.getLastName(), pdto.getEmail());
+        Address address = new Address(pdto.getAddress().getStreet(), pdto.getAddress().getAdditionalInfo());
+        CityInfo cityInfo = em.find(CityInfo.class, pdto.getAddress().getCityInfo().getZipCode());
+
         try {
+            address.addPerson(person);
+            cityInfo.addAddress(address);
             em.getTransaction().begin();
+            for (PhoneDTO p: pdto.getPhones()) {
+                Phone phone = new Phone(p.getNumber(), p.getDescription());
+                person.addPhone(phone);
+                System.out.println(phone);
+            }
+            for (Integer i: pdto.getHobbies()) {
+                Hobby h = em.find(Hobby.class, (long)i);
+                person.addHobby(h);
+                System.out.println(h);
+            }
+            em.persist(cityInfo);
+            em.persist(address);
             em.persist(person);
             em.getTransaction().commit();
         } finally {
             em.close();
+            System.out.println(person);
         }
         return new PersonDTO(person);
     }
