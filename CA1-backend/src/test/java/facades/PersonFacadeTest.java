@@ -99,13 +99,29 @@ public class PersonFacadeTest {
 
     @Test
     public void addPersonTest() {
-        PersonDTO expResult = new PersonDTO(person2);
+        Person tempPerson = person2;
+        tempPerson.setId(person2.getId());
+        PersonDTO expResult = new PersonDTO(tempPerson);
         String fName = "Mathias";
         String lName = "Filtenborg";
         String email = "F@gmail.com";
-        PersonDTO result = facade.addPerson(new PersonRestDTO(fName, lName, email));
-        assertEquals(expResult, result);
+        Person person = new Person(fName, lName, email);
+        person.setId(person2.getId());
+        Address address = new Address("Æblegade 6", "Hvidt hus");
+        CityInfo cityInfo = new CityInfo("2880", "Bagsværd");
+        Phone phone = new Phone("87654321", "cell");
+        Hobby hobby = new Hobby("test", "wiki.test", "testing", "tested");
+        person.addPhone(phone);
+        person.addHobby(hobby);
+        address.addPerson(person);
+        cityInfo.addAddress(address);
+
+        PersonDTO result = facade.addPerson(new PersonRestDTO(person));
+        assertEquals(expResult.getFirstName(), result.getFirstName());
+        assertEquals(expResult.getLastName(), result.getLastName());
+        assertEquals(expResult.getEmail(), result.getEmail());
     }
+
     //TODO: Virker men nok ikke den rigtige måde
     @Test
     public void deletePersonTest() throws Exception {
@@ -128,7 +144,7 @@ public class PersonFacadeTest {
     @Test
     public void getAllPersons() {
         PersonsDTO persons = facade.getAllPersons();
-        assertEquals(persons.getAll().size(),2);
+        assertEquals(persons.getAll().size(), 2);
     }
 
     @Test

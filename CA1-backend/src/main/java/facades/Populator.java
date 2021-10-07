@@ -5,13 +5,9 @@
  */
 package facades;
 
-import dtos.AddressDTO;
-import dtos.PersonDTO;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import dtos.PersonRestDTO;
 import entities.*;
 import errorhandling.PersonNotFoundException;
 import utils.EMF_Creator;
@@ -22,15 +18,9 @@ import utils.EMF_Creator;
  */
 public class Populator {
 
-    public static void main(String[] args) throws PersonNotFoundException {
+    public static void main(String[] args) {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
-        PersonFacade pf = PersonFacade.getPersonFacade(emf);
-
-        PersonDTO pdto = pf.addPerson(new PersonRestDTO("August", "Duelund", "tunor@gmail.com"));
-        Person person = new Person();
-        person.updateFromDto(pdto);
-
 
         Person p1 = new Person("Mathias", "Jensen", "cph-mj839@cphbusiness.dk");
         Address a1 = new Address("Holsteinsgade 66", "4.12");
