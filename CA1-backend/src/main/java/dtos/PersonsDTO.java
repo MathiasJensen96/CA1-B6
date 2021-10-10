@@ -11,6 +11,7 @@ public class PersonsDTO {
 
     public PersonsDTO(List<Person> personEntities) {
         personEntities.forEach((p) -> {
+            if (p == null) return;
             all.add(new PersonDTO(p));
         });
     }

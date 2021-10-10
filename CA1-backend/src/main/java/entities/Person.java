@@ -25,13 +25,13 @@ public class Person implements Serializable {
 
 
 
-    @ManyToMany(mappedBy = "persons", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "persons", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Hobby> hobbies;
 
     @ManyToOne
     private Address address;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Phone> phones;
 
     public Person(String firstName, String lastName, String email) {
@@ -142,6 +142,8 @@ public class Person implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", hobbies=" + hobbies +
+                ", address=" + address +
+                ", phones=" + phones +
                 '}';
     }
 }

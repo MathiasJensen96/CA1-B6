@@ -16,28 +16,173 @@
   <div id="all-content" style="display: none;">
     <ul id="menu" class="header">
       <li><a href="" id="about">About</a></li>
-      <li><a href="" id="ex1">Ex1</a></li>
-      <li><a href="" id="ex2">Ex2</a></li>
-      <li><a href="" id="ex3">Ex3</a></li>
+      <li><a href="" id="ex1">Person</a></li>
+      <li><a href="" id="ex2">Hobbies</a></li>
+      <li><a href="" id="ex3">Addresses</a></li>
     </ul>
 
     <div class="content">
 
       <!-- This is were you should place your basic HTML for exercise-1 -->
-      <div id="ex1_html" style="display:none;">
-        <h3>Exercise 1</h3>
-        <p>Add your basic HTML for Exercise 1 here</p>
-        <ul id="jokes"></ul>
+      <div id="person" style="display:none;">
+        <h3>Person</h3>
+        <p>List of all persons</p>
+
+        <table id="persons" class="table table-striped">
+
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Street</th>
+              <th>Zip</th>
+              <th>City</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tablerows">
+            <!-- Remove comment below for epic memes -->
+            <!--<div class="tenor-gif-embed" data-postid="19408520" data-share-method="host" data-aspect-ratio="1" data-width="10%"><a href="https://tenor.com/view/rat-jam-gif-19408520">Rat Jam GIF</a>from <a href="https://tenor.com/search/rat+jam-gifs">Rat Jam GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>-->
+          </tbody>
+        </table>
+
+        
+
+
+
+        <div id="editmodal" class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Edit person</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Please edit fields and press Save changes</p>
+
+                <div class="form-group">
+                  <label for="id">ID</label>
+                  <input id="edit_id" name="id" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input id="firstName" name="firstName" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input id="lastName" name="lastName" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" type="text" class="form-control" />
+                  <input id="phone_id" type="hidden" value="" />
+                </div>
+                <div class="form-group">
+                  <label for="street">Street</label>
+                  <input id="street" name="street" type="text" class="form-control" />
+                  <input id="address_id" type="hidden" value="" />
+                </div>
+                <div class="form-group">
+                  <label for="zip">Zip</label>
+                  <input id="zip" name="zip" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input id="city" name="city" type="text" class="form-control" />
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="model-edit-save-btn" type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="addmodal" class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Add Person</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Please add person information and press Save changes</p>
+
+                <div class="form-group">
+                  <label for="addfirstName">First Name</label>
+                  <input id="addfirstName" name="addfirstName" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="addlastName">Last Name</label>
+                  <input id="addlastName" name="addlastName" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="addemail">Email</label>
+                  <input id="addemail" name="addemail" type="text" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="addphone">Phone</label>
+                  <input id="addphone" name="addphone" type="text" class="form-control" />
+                  <input id="addphone_id" type="hidden" value="" />
+                </div>
+                <div class="form-group">
+                  <label for="addstreet">Street</label>
+                  <input id="addstreet" name="addstreet" type="text" class="form-control" />
+                  <input id="addaddress_id" type="hidden" value="" />
+                </div>
+                <div class="form-group">
+                  <label for="addzip">Zip</label>
+                  <input id="addzip" name="addzip" type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="modal-add-save-btn" type="button" class="btn btn-primary">Add Person</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="add-person-btn" type="button" class="btn btn-primary">Add Person</button>
 
       </div>
-      <!-- End of HTML for exercise-1 -->
+      <!-- End of HTML for Person-->
 
 
 
       <!-- This is were you should place your basic HTML for exercise-2 -->
       <div id="ex2_html" style="display:none;">
-        <h3>Exercise 2</h3>
-        <p id="ex2p">Add your basic HTML for Exercise 2 here</p>
+        <h3>Hobbies</h3>
+        <p id="ex2p">List of all hobbies</p>
+
+        <table id="hobbies" class="table table-striped">
+
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Category</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Wiki Link</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="hobbytablerows">
+          </tbody>
+        </table>
+
       </div>
       <!-- End of HTML for exercise-2 -->
 
@@ -47,7 +192,7 @@
         <h3>Ex-3</h3>
         <p>Add your basic HTML for Exercise 3 here</p>
 
-        <div class="row" style="min-height: 5em;">
+        <div class="row" style="min-height: 5em;"">
       <div class=" col-md-8 pre-scrollable" style="background-color: lightgrey;">
           <h5>All Users</h5>
           <table class="table">
